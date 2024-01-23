@@ -1,4 +1,4 @@
-name: Python application release
+name: Python application release Attempt
 permissions:
   contents: write
   actions: read
