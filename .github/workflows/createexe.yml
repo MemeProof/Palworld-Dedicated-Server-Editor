@@ -11,12 +11,11 @@ jobs:
   extract-version:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.extract_version.outputs.version }}
+      version: ${{ steps.extract_version.outputs.version }}
     steps:
       - name: Extract version
         id: extract_version
       - name: Set output
-        run: echo "version=$(echo ${{ env.version }})" >> $GITHUB_ENV
         run: echo "version=$(echo ${{ env.version }})" >> $GITHUB_OUTPUT
   build:
     needs: extract-version
