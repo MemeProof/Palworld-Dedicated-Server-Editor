@@ -20,9 +20,9 @@ jobs:
         run: pip install pyinstaller
       - name: Define version number
         id: vars
-        run: echo "::set-output name=version::${GITHUB_REF#refs/tags/v}"
+        run:  echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
       - name: Create Executable
-        run: pyinstaller --onefile --noconsole --name ServerEditor-${{ steps.vars.outputs.version }} main.py
+        run: pyinstaller --onefile --noconsole --name ServerEditor-%version% main.py
         shell: cmd # Specify the shell to use cmd
       - name: Debug - List files in dist/
         run: dir dist\
