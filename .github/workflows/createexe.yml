@@ -22,7 +22,7 @@ jobs:
         id: vars
         run: echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
       - name: Create Executable
-        run: pyinstaller --onefile --noconsole --name=ServerEditor.${{ steps.vars.outputs.version }} main.py
+        run: pyinstaller --onefile --noconsole --name=ServerEditor.${{ steps.vars.outputs.version }}.exe main.py
       - name: Debug - List files in dist/
         run: ls -l dist/
       - name: Upload Executable as Artifact
