@@ -35,6 +35,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Define version number
+        id: vars
+        run: echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
