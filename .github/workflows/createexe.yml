@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: server-editor
-          path: dist/ServerEditor.${{ steps.vars.outputs.version }}
+          path: dist/ServerEditor.${{ steps.vars.outputs.version }}.exe
 
   release:
     needs: build
