@@ -16,13 +16,18 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
+      - name: Install dependencies
+      run: |
+        sudo dpkg --add-architecture i386
+        sudo apt-get update
+        sudo apt-get install -y wine wine32
       - name: Install PyInstaller
         run: pip install pyinstaller
       - name: Define version number
         id: vars
         run: echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
       - name: Create Executable
-        run: pyinstaller --onefile --noconsole --name=ServerEditor.${{ steps.vars.outputs.version }}.exe main.py
+        run: wine pyinstaller --onefile --noconsole --name=ServerEditor.${{ steps.vars.outputs.version }}.exe main.py
       - name: Debug - List files in dist/
         run: ls -l dist/
       - name: Upload Executable as Artifact
