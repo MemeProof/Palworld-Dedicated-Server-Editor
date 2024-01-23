@@ -15,14 +15,16 @@ jobs:
     steps:
       - name: Extract version
         id: extract_version
-        run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+        run: |
+            echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+            echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
   build:
     needs: extract-version
     runs-on: windows-latest
     steps:
       - env:
           OUTPUT1: ${{ needs.extract-version.outputs.version }}
-        run: echo "$OUTPUT1"
+        run: echo "$OUTPUT1" and "$env:example_output"
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
