@@ -19,10 +19,10 @@ jobs:
         pip install pyinstaller  # Add any other necessary packages
 
     - name: Build Executable
-      run: pyinstaller --onefile main.py
+      run: pyinstaller --onefile --name=ServerEditor main.py
 
     - name: Upload Executable
       uses: actions/upload-artifact@v2
       with:
-        name: your-application
-        path: ServerEditor.exe
+        name: ServerEditor
+        path: dist/main.exe
