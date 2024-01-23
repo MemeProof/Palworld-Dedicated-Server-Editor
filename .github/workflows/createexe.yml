@@ -21,6 +21,7 @@ jobs:
       - name: Define version number
         id: vars
         run:  echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+        shell: cmd
       - name: Create Executable
         run: pyinstaller --onefile --noconsole --name ServerEditor-%version% main.py
         shell: cmd # Specify the shell to use cmd
