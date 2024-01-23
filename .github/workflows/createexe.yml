@@ -17,7 +17,7 @@ jobs:
         id: extract_version
         run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
       - name: Set output
-        run: echo "version=${{ env.version }}" >> $GITHUB_ENV
+        run: echo "version=${{ env.version }}" >> $GITHUB_OUTPUT
 
   build:
     needs: extract-version
