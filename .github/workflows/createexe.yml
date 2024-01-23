@@ -22,12 +22,16 @@ jobs:
         id: vars
         run: echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
       - name: Create Executable
-        run: pyinstaller --onefile --noconsole --name=ServerEditor.${{ steps.vars.outputs.version }} main.py
+        run: |
+          pyinstaller --onefile --noconsole --name=ServerEditor.${{ steps.vars.outputs.version }} main.py
+          mv dist/ServerEditor.${{ steps.vars.outputs.version }} dist/ServerEditor.${{ steps.vars.outputs.version }}.exe
+      - name: Debug - List files in dist/
+        run: ls -l dist/
       - name: Upload Executable as Artifact
         uses: actions/upload-artifact@v2
         with:
           name: server-editor
-          path: dist/ServerEditor.${{ steps.vars.outputs.version }}
+          path: dist/ServerEditor.${{ steps.vars.outputs.version }}.exe
 
   release:
     needs: build
@@ -37,6 +41,8 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: server-editor
+      - name: Debug - List files after download
+        run: ls -l
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -53,6 +59,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./ServerEditor.${{ steps.vars.outputs.version }}
+          asset_path: ./ServerEditor.${{ steps.vars.outputs.version }}.exe
           asset_name: ServerEditor.${{ steps.vars.outputs.version }}.exe
           asset_content_type: application/octet-stream
