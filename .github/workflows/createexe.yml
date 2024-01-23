@@ -23,6 +23,9 @@ jobs:
     needs: extract-version
     runs-on: windows-latest
     steps:
+      - env:
+          OUTPUT1: ${{ needs.extract-version.outputs.version }}
+        run: echo "$OUTPUT1"
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
