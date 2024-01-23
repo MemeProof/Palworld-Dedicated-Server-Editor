@@ -11,16 +11,16 @@ jobs:
   extract-version:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.extract_version.outputs.version }}
+      output1: ${{ steps.extract_version.outputs.version }}
     steps:
       - name: Extract version
         id: extract_version
-        run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
-      
+        run: |
+          echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      - name: Set output
+        run: echo "version=$(echo ${{ env.version }})" >> $GITHUB_OUTPUT
   build:
     runs-on: windows-latest # Updated to use Windows runner
-    outputs:
-      version: ${{ needs.extract-version.outputs.version }} # Ensure this line is here to set the job output
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -32,7 +32,9 @@ jobs:
       - name: Create Executable
         run: pyinstaller --onefile --noconsole --name "ServerEditor-${{ needs.extract-version.outputs.version }}.exe" main.py
       - name: Debug - List files in dist/
-        run: dir dist\
+        run: |
+            echo ${{ needs.extract-version.outputs.version }}
+            dir dist\
         shell: cmd
       - name: Upload Executable as Artifact
         uses: actions/upload-artifact@v2
