@@ -11,15 +11,16 @@ jobs:
   extract-version:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.set_version.outputs.version }}
+      version: ${{ steps.extract_version.outputs.version }}
     steps:
-      - name: Extract version from tag
-        id: set_version
+      - name: Extract version
+        id: extract_version
         run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+      
   build:
     runs-on: windows-latest # Updated to use Windows runner
     outputs:
-      version: ${{ steps.vars.outputs.version }} # Ensure this line is here to set the job output
+      version: ${{ needs.extract-version.outputs.version }} # Ensure this line is here to set the job output
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
