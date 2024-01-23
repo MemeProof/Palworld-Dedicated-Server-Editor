@@ -15,11 +15,13 @@ jobs:
     steps:
       - name: Extract version
         id: extract_version
+        run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
       - name: Set output
-        run: echo "version=$(echo ${{ env.version }})" >> $GITHUB_OUTPUT
+        run: echo "version=${{ env.version }}" >> $GITHUB_ENV
+
   build:
     needs: extract-version
-    runs-on: windows-latest # Updated to use Windows runner
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -42,9 +44,8 @@ jobs:
           path: dist/ServerEditor-${{ needs.extract-version.outputs.version }}.exe
 
   release:
-    needs: build
-    needs: extract-version
-    runs-on: windows-latest # Updated to use Windows runner
+    needs: [build, extract-version]
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
