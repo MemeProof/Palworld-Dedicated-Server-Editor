@@ -16,9 +16,6 @@ jobs:
       - name: Extract version
         id: extract_version
         run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
-      - name: Set output
-        run: echo "version=${{ env.version }}" >> $GITHUB_OUTPUT
-
   build:
     needs: extract-version
     runs-on: windows-latest
