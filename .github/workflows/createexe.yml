@@ -15,11 +15,11 @@ jobs:
     steps:
       - name: Extract version
         id: extract_version
-        run: |
-          echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
       - name: Set output
+        run: echo "version=$(echo ${{ env.version }})" >> $GITHUB_ENV
         run: echo "version=$(echo ${{ env.version }})" >> $GITHUB_OUTPUT
   build:
+    needs: extract-version
     runs-on: windows-latest # Updated to use Windows runner
     steps:
       - uses: actions/checkout@v2
@@ -44,6 +44,7 @@ jobs:
 
   release:
     needs: build
+    needs: extract-version
     runs-on: windows-latest # Updated to use Windows runner
     steps:
       - uses: actions/checkout@v2
