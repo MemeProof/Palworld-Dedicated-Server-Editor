@@ -364,7 +364,7 @@ def populate_other_settings(configurator):
     configurator.add_config_line("EnemyDropItemRate: Dropped Items Multiplier", "entry", "EnemyDropItemRate", None, "1.000000")
     configurator.add_config_line("ExistPlayer After Logout: No idea, default is False", "combo", "bExistPlayerAfterLogout", ["True", "False"], "False")
     configurator.add_config_line("GuildPlayerMaxNum: Max player of Guild (currently 20 max)", "combo", "GuildPlayerMaxNum", ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"], "20")
-    configurator.add_config_line("IsMultiplay: No idea, default is False", "combo", "bIsMultiplay", ["True", "False"], "False")
+    configurator.add_config_line("IsMultiplay: I think this is if the server is multiplayer or singleplayer, default is False", "combo", "bIsMultiplay", ["True", "False"], "False")
     configurator.add_config_line("IsPvP: No idea, default is False", "combo", "bIsPvP", ["True", "False"], "False")
     configurator.add_config_line("IsStartLocationSelect By Map: No idea, default is True", "combo", "bIsStartLocationSelectByMap", ["True", "False"], "True")
     configurator.add_config_line("NightTimeSpeedRate: Night time speed", "entry", "NightTimeSpeedRate", None, "1.000000")
@@ -374,14 +374,14 @@ def populate_server_settings(configurator):
     configurator.add_config_line("BanListURL: list of steam_id's of banned players. Default is\nhttps://api.palworldgame.com/api/banlist.txt.", "text", "BanListURL", None, "https://api.palworldgame.com/api/banlist.txt")
     configurator.add_config_line("PublicIP: Public IP. Can be left empty. I leave mine empty and just give my friends my IP.\nYou can make this your public IP.", "ip", "PublicIP", None, "127.0.0.1")
     configurator.add_config_line("PublicPort: Port for Server, default is 8211", "entry", "PublicPort", None, "8211")
-    configurator.add_config_line("RCONEnabled: Enable RCON Default is False", "combo", "RCONEnabled", ["True", "False"], "False")
+    configurator.add_config_line("RCONEnabled: Enable RCON Default is False.\nRCON is the ability to remotely execute commands to the server.", "combo", "RCONEnabled", ["True", "False"], "False")
     configurator.add_config_line("RCONPort: Port number for RCON. Default is 25575", "entry", "RCONPort", None, "25575")
     configurator.add_config_line("Region: i'm not sure what this is default is blank", "text", "Region", None, "")
     configurator.add_config_line("ServerDescription: Server Description. Can be left empty", "text", "ServerDescription", None, "")
     configurator.add_config_line("ServerName: Server name. Can be left empty", "text", "ServerName", None, "Default Palword Server")
     configurator.add_config_line("ServerPassword: Server Password. Can be left empty", "text", "ServerPassword", None, "")
-    configurator.add_config_line("ServerPlayerMaxNum: Maximum number of people who can join the server (currently 32 max)", "combo", "ServerPlayerMaxNum", ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32"], "32")
-    configurator.add_config_line("UseAuth: Also, don't know what this is. Default is True.", "combo", "bUseAuth", ["True", "False"], "True")
+    configurator.add_config_line("ServerPlayerMaxNum: Maximum number of people who can join the server default is 32", "combo", "ServerPlayerMaxNum", ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32"], "32")
+    configurator.add_config_line("UseAuth: Also don't know what this is. Default is True.", "combo", "bUseAuth", ["True", "False"], "True")
 
 
 
